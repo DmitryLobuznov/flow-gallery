@@ -26,11 +26,11 @@ Usage
     python cahn_hilliard.py --n 512 --steps 4000 --cmap magma
 """
 
-from __future__ import annotations
-
-import argparse
+from pathlib import Path
+from typing import Optional
 
 import numpy as np
+import typer
 
 
 def laplacian_symbol(n: int, dx: float) -> np.ndarray:
@@ -127,32 +127,27 @@ def render_gif(
     )
 
 
-def main() -> None:
-    p = argparse.ArgumentParser(description="Cahn–Hilliard reference solver / GIF maker")
-    p.add_argument("--n", type=int, default=256, help="grid size")
-    p.add_argument("--steps", type=int, default=2000, help="time steps")
-    p.add_argument("--every", type=int, default=20, help="capture a frame every N steps")
-    p.add_argument("--dt", type=float, default=0.5, help="time step")
-    p.add_argument("--kappa", type=float, default=1.0, help="gradient energy coefficient")
-    p.add_argument("--mobility", type=float, default=1.0, help="mobility M")
-    p.add_argument("--mean", type=float, default=0.0, help="mean composition (0=labyrinth, ±=droplets)")
-    p.add_argument("--cmap", type=str, default="viridis", help="matplotlib colormap")
-    p.add_argument("--fps", type=int, default=25, help="gif frame rate")
-    p.add_argument("--seed", type=int, default=0, help="RNG seed")
-    p.add_argument("--gif", type=str, default=None, help="output gif path (if omitted, just runs)")
-    args = p.parse_args()
-
-    if args.gif:
-        render_gif(
-            args.gif, args.n, args.steps, args.every, args.dt, args.kappa,
-            args.mobility, args.mean, args.cmap, args.fps, args.seed,
-        )
+def main(
+    n: int = typer.Option(256, help="grid size"),
+    steps: int = typer.Option(2000, help="time steps"),
+    every: int = typer.Option(20, help="capture a frame every N steps"),
+    dt: float = typer.Option(0.5, help="time step"),
+    kappa: float = typer.Option(1.0, help="gradient energy coefficient"),
+    mobility: float = typer.Option(1.0, help="mobility M"),
+    mean: float = typer.Option(0.0, help="mean composition (0=labyrinth, ±=droplets)"),
+    cmap: str = typer.Option("viridis", help="matplotlib colormap"),
+    fps: int = typer.Option(25, help="gif frame rate"),
+    seed: int = typer.Option(0, help="RNG seed"),
+    gif: Optional[Path] = typer.Option(None, help="output gif path (if omitted, just runs)"),
+) -> None:
+    """Cahn–Hilliard reference solver / GIF maker."""
+    if gif is not None:
+        render_gif(str(gif), n, steps, every, dt, kappa, mobility, mean, cmap, fps, seed)
     else:
-        sim = CahnHilliard(n=args.n, dt=args.dt, kappa=args.kappa,
-                           mobility=args.mobility, mean=args.mean, seed=args.seed)
-        sim.run(args.steps)
-        print(f"ran {args.steps} steps · mean drift {abs(sim.total - args.mean):.2e}")
+        sim = CahnHilliard(n=n, dt=dt, kappa=kappa, mobility=mobility, mean=mean, seed=seed)
+        sim.run(steps)
+        print(f"ran {steps} steps · mean drift {abs(sim.total - mean):.2e}")
 
 
 if __name__ == "__main__":
-    main()
+    typer.run(main)

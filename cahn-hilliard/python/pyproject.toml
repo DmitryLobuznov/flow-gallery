@@ -1,0 +1,16 @@
+[project]
+name = "cahn-hilliard"
+version = "0.1.0"
+description = "Cahn–Hilliard spectral reference solver and GIF generator for flow-gallery."
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "matplotlib>=3.7",
+    "imageio>=2.31",
+    "typer>=0.12",
+]
+
+# This is a runnable script project, not an installable package, so don't
+# try to build/install it — uv just manages the environment and deps.
+[tool.uv]
+package = false

@@ -14,7 +14,6 @@ with a semi-implicit spectral scheme and generates the animations below.
 
 **▶ Live demo:** https://dmitrylobuznov.github.io/flow-gallery/cahn-hilliard/
 
-<!-- Replace with a real capture once generated, e.g. python/cahn_hilliard.py --gif assets/spinodal.gif -->
 <p align="center">
   <img src="assets/spinodal.gif" width="32%" alt="spinodal decomposition" />
   <img src="assets/droplets.gif" width="32%" alt="droplet morphology" />
@@ -29,20 +28,21 @@ free energy combines a double-well bulk term and a gradient (interfacial)
 penalty:
 
 $$
-F[c] = \int \Big[\, f(c) + \tfrac{\kappa}{2}\,|\nabla c|^2 \,\Big]\, d\mathbf{x},
-\qquad f(c) = \tfrac{1}{4}\,(c^2 - 1)^2 .
+F[c] = \int \left[  f(c) + \frac{\kappa}{2} \lvert\nabla c\rvert^2  \right] d\mathbf{x},
+\qquad
+f(c) = \frac{1}{4}\left(c^2 - 1\right)^2 .
 $$
 
 Conserved (model-B) gradient flow of this energy gives the Cahn–Hilliard
 equation:
 
 $$
-\frac{\partial c}{\partial t} = M\,\nabla^2 \mu,
+\frac{\partial c}{\partial t} = M \nabla^2 \mu,
 \qquad
-\mu = \frac{\delta F}{\delta c} = f'(c) - \kappa\,\nabla^2 c = c^3 - c - \kappa\,\nabla^2 c .
+\mu = \frac{\delta F}{\delta c} = f'(c) - \kappa \nabla^2 c = c^3 - c - \kappa \nabla^2 c .
 $$
 
-- $\mu$ is the **chemical potential**; transport is driven by its Laplacian, so total composition $\int c\,d\mathbf{x}$ is **conserved**.
+- $\mu$ is the **chemical potential**; transport is driven by its Laplacian, so total composition $\int c d\mathbf{x}$ is **conserved**.
 - $\kappa$ sets the **interfacial width** $\sim\sqrt{\kappa}$ and hence the surface tension — the capillary ingredient.
 - $M$ is the **mobility**, rescaling time.
 - The mean composition selects the morphology: **0 → interpenetrating labyrinth**, a nonzero offset → **isolated droplets** of the minority phase.
@@ -57,7 +57,7 @@ coarsening**, with the characteristic length growing as $L(t)\sim t^{1/3}$
 |---|---|---|
 | Method | Explicit finite differences | Semi-implicit (IMEX) Fourier spectral |
 | Laplacian | Isotropic 9-point stencil | Exact in Fourier space |
-| Stability | Sub-stepped explicit Euler | Eyre convex-splitting, large $\Delta t$ |
+| Stability | Sub-stepped explicit Euler, dt auto-capped | Stabilized semi-implicit (Eyre-type), large $\Delta t$ |
 | Boundaries | Periodic (`GL_REPEAT`) | Periodic (FFT) |
 | Runs on | GPU fragment shaders, ping-pong FBOs | NumPy/CPU |
 
@@ -65,9 +65,9 @@ The spectral scheme treats the stiff fourth-order operator implicitly,
 stabilised so it stays well-behaved at large time steps:
 
 $$
-\hat{c}^{\,n+1} =
-\frac{\hat{c}^{\,n} - \Delta t\,M\,k^2\,\widehat{[\,c^3 - (1+a)c\,]}}
-     {1 + \Delta t\,M\,a\,k^2 + \Delta t\,M\,\kappa\,k^4}.
+\hat{c}^{ n+1} =
+\frac{\hat{c}^{ n} - \Delta t  M  k^2  \widehat{c^3 - (1+a)c}}
+     {1 + \Delta t  M  a  k^2 + \Delta t  M  \kappa  k^4}.
 $$
 
 ## Interactive controls
@@ -86,16 +86,18 @@ $$
 python -m http.server 8000   # then open http://localhost:8000
 ```
 
-**Python reference / GIF generation:**
+**Python reference / GIF generation** — managed with [uv](https://docs.astral.sh/uv/).
+`uv run` reads `pyproject.toml`, builds the environment, and runs — no manual
+venv or `pip install` needed. The commands below regenerate the three GIFs above:
 
 ```bash
 cd python
-pip install -r requirements.txt
-
-python cahn_hilliard.py --gif ../assets/spinodal.gif                 # labyrinth
-python cahn_hilliard.py --mean 0.35 --cmap magma --gif ../assets/droplets.gif
-python cahn_hilliard.py --n 512 --steps 4000 --gif ../assets/coarsening.gif
+uv run python cahn_hilliard.py --mean 0.0  --cmap viridis --n 256 --steps 1600           --gif ../assets/spinodal.gif    # labyrinth
+uv run python cahn_hilliard.py --mean 0.32 --cmap magma   --n 256 --steps 1600           --gif ../assets/droplets.gif    # droplets
+uv run python cahn_hilliard.py --mean 0.0  --cmap inferno --n 256 --steps 3000 --every 30 --gif ../assets/coarsening.gif  # coarsening
 ```
+
+Run `uv run python cahn_hilliard.py --help` for all parameters (κ, mobility, dt, …).
 
 ## References
 
