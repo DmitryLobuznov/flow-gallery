@@ -110,7 +110,9 @@ uniform float uDt;
 uniform float uM;
 void main(){
   float c = texture(uC, vUV).r;
-  float c2 = c + uDt * uM * lap(vUV);   // uField bound to μ here
+  // uField is bound to μ here; clamp is a safety net against numerical
+  // blow-up (c stays within ~±1.05 in stable regimes, so it never bites).
+  float c2 = clamp(c + uDt * uM * lap(vUV), -2.0, 2.0);
   frag = vec4(c2, 0.0, 0.0, 1.0);
 }`;
 
@@ -335,11 +337,29 @@ const bind = (id, key, fmt, after) => {
   apply();
 };
 
+/* The explicit scheme is stable only while dt·M·κ stays below a fixed
+ * bound set by the biharmonic (∇⁴) term — so the safe dt shrinks as κ or
+ * M grow (≈ 1/(κM)). Cap the dt slider accordingly so the sim can't be
+ * driven unstable; extra speed comes from "Steps / frame", not from dt. */
+const dtEl = document.getElementById("dt");
+const dtOut = document.getElementById("dtVal");
+const stableDt = (kappa, M) => Math.min(0.04, Math.max(0.005, 0.026 / (M * kappa)));
+function refreshDtLimit() {
+  const maxDt = Math.round(stableDt(params.kappa, params.M) * 1000) / 1000;
+  dtEl.max = maxDt.toFixed(3);
+  if (parseFloat(dtEl.value) > maxDt) {
+    dtEl.value = maxDt;
+    params.dt = maxDt;
+    if (dtOut) dtOut.textContent = maxDt.toFixed(3);
+  }
+}
+
 bind("mean", "mean", (v) => v.toFixed(2));
-bind("kappa", "kappa", (v) => v.toFixed(2));
-bind("mob", "M", (v) => v.toFixed(2));
+bind("kappa", "kappa", (v) => v.toFixed(2), refreshDtLimit);
+bind("mob", "M", (v) => v.toFixed(2), refreshDtLimit);
 bind("dt", "dt", (v) => v.toFixed(3));
 bind("sub", "sub", (v) => v);
+refreshDtLimit();
 document.getElementById("cmap").addEventListener("change", (e) => {
   params.cmap = parseInt(e.target.value, 10);
 });
