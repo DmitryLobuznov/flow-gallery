@@ -10,7 +10,7 @@ physics, once for speed and once for clarity.
 | Effect | Status | Demo |
 |---|---|---|
 | [**Cahn–Hilliard**](cahn-hilliard/) — phase separation / spinodal decomposition | ✅ live | [open ↗](https://dmitrylobuznov.github.io/flow-gallery/cahn-hilliard/) |
-| Capillary waves — surface-tension ripples | 🛠 planned | — |
+| [**Capillary waves**](capillary-waves/) — gravity–capillary surface ripples | ✅ live | [open ↗](https://dmitrylobuznov.github.io/flow-gallery/capillary-waves/) |
 | Thin-film dewetting — rupture &amp; retraction | 🛠 planned | — |
 | Rayleigh–Plateau — jet break-up into droplets | 🛠 planned | — |
 | Marangoni flow — surface-tension-gradient convection | 🛠 planned | — |
