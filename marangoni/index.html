@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marangoni Convection · Cells on the GPU</title>
+  <meta name="description" content="Interactive WebGL2 Marangoni–Bénard convection — surface-tension-gradient convection cells (hexagons & rolls) forming in real time on the GPU." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <canvas id="sim"></canvas>
+
+  <aside id="panel">
+    <header>
+      <h1>Marangoni</h1>
+      <p class="sub">Convection cells on the GPU</p>
+    </header>
+
+    <div class="row buttons">
+      <button id="playPause" class="primary">⏸ Pause</button>
+      <button id="reset">↺ Reset</button>
+    </div>
+
+    <label class="ctl">
+      <span>Drive r <i id="rrVal">0.30</i></span>
+      <input type="range" id="rr" min="0.05" max="0.8" step="0.01" value="0.30" />
+      <small>Marangoni number above onset — higher → rolls, lower → hexagons</small>
+    </label>
+
+    <label class="ctl">
+      <span>Hexagon bias g <i id="ggVal">1.0</i></span>
+      <input type="range" id="gg" min="0.0" max="2.5" step="0.1" value="1.0" />
+      <small>0 → stripes/rolls · large → hexagonal cells</small>
+    </label>
+
+    <label class="ctl">
+      <span>Steps / frame <i id="subVal">30</i></span>
+      <input type="range" id="sub" min="5" max="80" step="5" value="30" />
+    </label>
+
+    <label class="ctl">
+      <span>Look</span>
+      <select id="cmap">
+        <option value="0">Inferno</option>
+        <option value="1">Magma</option>
+        <option value="2">Viridis</option>
+        <option value="3">Thermal</option>
+      </select>
+    </label>
+
+    <p class="hint">Drag to perturb the layer (right-drag cools). ⟨space⟩ play/pause · ⟨r⟩ reset</p>
+    <footer>
+      <a href="../">← gallery</a>
+      <a href="https://github.com/DmitryLobuznov/flow-gallery/tree/main/marangoni" target="_blank" rel="noopener">source ↗</a>
+      <span id="fps"></span>
+    </footer>
+  </aside>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
