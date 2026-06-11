@@ -1,11 +1,19 @@
 # flow-gallery
 
-A growing collection of **interactive, GPU-accelerated simulations of capillary
-and interfacial flow phenomena**. Every effect runs in real time in the browser
+A collection of **interactive, GPU-accelerated simulations of capillary and
+interfacial flow phenomena**. Every effect runs in real time in the browser
 (WebGL2) and ships with a clean **NumPy spectral reference solver** — the same
 physics, once for speed and once for clarity.
 
 **▶ Gallery:** https://dmitrylobuznov.github.io/flow-gallery/
+
+<p align="center">
+  <img src="cahn-hilliard/assets/spinodal.gif" width="19%" alt="Cahn–Hilliard" />
+  <img src="capillary-waves/assets/ripple.gif" width="19%" alt="capillary waves" />
+  <img src="dewetting/assets/rupture.gif" width="19%" alt="dewetting" />
+  <img src="rayleigh-plateau/assets/breakup.gif" width="19%" alt="Rayleigh–Plateau" />
+  <img src="marangoni/assets/cells.gif" width="19%" alt="Marangoni cells" />
+</p>
 
 | Effect | Status | Demo |
 |---|---|---|
@@ -14,14 +22,6 @@ physics, once for speed and once for clarity.
 | [**Thin-film dewetting**](dewetting/) — rupture &amp; retraction into droplets | ✅ live | [open ↗](https://dmitrylobuznov.github.io/flow-gallery/dewetting/) |
 | [**Rayleigh–Plateau**](rayleigh-plateau/) — jet break-up into droplets | ✅ live | [open ↗](https://dmitrylobuznov.github.io/flow-gallery/rayleigh-plateau/) |
 | [**Marangoni convection**](marangoni/) — surface-tension-gradient convection cells | ✅ live | [open ↗](https://dmitrylobuznov.github.io/flow-gallery/marangoni/) |
-
-<p align="center">
-  <a href="cahn-hilliard/">
-    <img src="cahn-hilliard/assets/spinodal.gif" width="32%" alt="Cahn–Hilliard spinodal decomposition" />
-    <img src="cahn-hilliard/assets/droplets.gif" width="32%" alt="droplet morphology" />
-    <img src="cahn-hilliard/assets/coarsening.gif" width="32%" alt="coarsening" />
-  </a>
-</p>
 
 ## Design
 
@@ -32,10 +32,13 @@ flow-gallery/
 ├── index.html            ← gallery landing page
 ├── cahn-hilliard/        ← module: WebGL demo + Python reference + GIFs
 │   ├── index.html
-│   ├── js/main.js        ← GPU solver (ping-pong FBOs, fragment shaders)
-│   ├── python/           ← spectral reference solver + GIF generator
+│   ├── js/main.js        ← GPU solver (fragment shaders, ping-pong FBOs)
+│   ├── python/           ← reference solver + GIF generator (uv + Typer)
 │   └── assets/
-└── ...
+├── capillary-waves/      ← gravity–capillary surface waves
+├── dewetting/            ← thin-film rupture into droplets
+├── rayleigh-plateau/     ← jet break-up (1D slender-jet)
+└── marangoni/            ← convection cells (Swift–Hohenberg)
 ```
 
 The **browser demo** trades a little numerical accuracy for real-time speed
