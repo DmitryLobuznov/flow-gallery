@@ -30,15 +30,15 @@ Rayleigh–Bénard and Marangoni convection (Cross & Hohenberg, *Rev. Mod. Phys.
 surface temperature / upwelling):
 
 $$
-\frac{\partial u}{\partial t} = r\,u - (1+\nabla^2)^2\,u + g\,u^2 - u^3 .
+\frac{\partial u}{\partial t} = r u - (1+\nabla^2)^2 u + g u^2 - u^3 .
 $$
 
 - $r$ — the **drive**, a proxy for how far the Marangoni number sits above onset.
 - $(1+\nabla^2)^2$ — the **pattern-selecting** operator: it amplifies a band of wavenumbers around $|k| = 1$, so a pattern of wavelength $2\pi$ emerges (the cell size).
-- $g\,u^2 - u^3$ — **saturation**. The cubic caps the amplitude (the pattern is always bounded — the solver can't blow up). The quadratic $g$ breaks the up/down symmetry and selects **hexagons** — the hallmark Marangoni cell — over **rolls** (which win when $g = 0$).
+- $g u^2 - u^3$ — **saturation**. The cubic caps the amplitude (the pattern is always bounded — the solver can't blow up). The quadratic $g$ breaks the up/down symmetry and selects **hexagons** — the hallmark Marangoni cell — over **rolls** (which win when $g = 0$).
 
 Why hexagons for Marangoni? The temperature-dependence of surface tension is a
-quadratic (non-Boussinesq) effect, which is exactly what the $g\,u^2$ term
+quadratic (non-Boussinesq) effect, which is exactly what the $g u^2$ term
 encodes — so surface-tension-driven convection prefers hexagonal cells, while
 purely buoyant convection (symmetric) tends to rolls.
 

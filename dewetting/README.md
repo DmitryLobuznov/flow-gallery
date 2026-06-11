@@ -26,7 +26,7 @@ The film thickness $h(x,y)$ evolves by the **lubrication (thin-film) equation**,
 a conservative gradient flow:
 
 $$
-\frac{\partial h}{\partial t} = -\nabla\cdot\Big[\, h^3\,\nabla\big(\gamma\nabla^2 h + \Pi(h)\big) \Big].
+\frac{\partial h}{\partial t} = -\nabla\cdot\Big[  h^3 \nabla\big(\gamma\nabla^2 h + \Pi(h)\big) \Big].
 $$
 
 - $h^3$ — the **lubrication mobility**. It is *degenerate* (vanishes as $h\to 0$), which is what gives dewetting its distinctive look — droplets joined by thin necks, retracting rims — quite unlike constant-mobility phase separation.
@@ -34,14 +34,14 @@ $$
 - $\Pi(h)$ — **disjoining pressure** from the wetting energy. We use a bounded double-well potential with minima at a precursor thickness $h_p$ and a droplet height $h_d$,
 
 $$
-W(h) = \kappa\,(h-h_p)^2 (h-h_d)^2, \qquad \Pi(h) = -W'(h).
+W(h) = \kappa (h-h_p)^2 (h-h_d)^2, \qquad \Pi(h) = -W'(h).
 $$
 
 A flat film whose mean thickness sits on the central hump ($W''<0$) is
 **spinodally unstable**. Linearising about $\bar h$ gives the growth rate
 
 $$
-s(k) = -\bar h^3\,k^2\big(\gamma k^2 - \Pi'(\bar h)\big),
+s(k) = -\bar h^3 k^2\big(\gamma k^2 - \Pi'(\bar h)\big),
 $$
 
 so a band of long-wavelength modes ($\gamma k^2 < \Pi'(\bar h)$) grows, fastest

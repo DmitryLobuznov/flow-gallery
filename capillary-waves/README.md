@@ -25,14 +25,14 @@ Small-amplitude waves on a pond of depth $H$ obey the **gravity–capillary
 dispersion relation**
 
 $$
-\omega(k)^2 = \left( g\,k + \frac{\sigma}{\rho}\,k^3 \right)\tanh(kH),
+\omega(k)^2 = \left( g k + \frac{\sigma}{\rho} k^3 \right)\tanh(kH),
 $$
 
 where $k = \lvert\mathbf{k}\rvert$ is the wavenumber. The two restoring forces
 split by scale:
 
-- $g\,k$ — **gravity**, dominant at long wavelengths (small $k$).
-- $(\sigma/\rho)\,k^3$ — **surface tension**, dominant at short wavelengths. It
+- $g k$ — **gravity**, dominant at long wavelengths (small $k$).
+- $(\sigma/\rho) k^3$ — **surface tension**, dominant at short wavelengths. It
   makes the group velocity $\mathrm{d}\omega/\mathrm{d}k$ *increase* with $k$, so
   the smallest ripples outrun everything else and sit on the leading edge.
 - $\tanh(kH)$ — the **finite-depth** factor: deep water ($kH \gg 1$) → $1$;
@@ -58,7 +58,7 @@ runs at hundreds of steps per second on the GPU. Released from rest, every
 Fourier mode of the reference is a damped oscillator,
 
 $$
-\hat{h}(\mathbf{k}, t) = \hat{h}_0(\mathbf{k})\,\cos\!\big(\omega(k)\,t\big)\,e^{-\gamma t},
+\hat{h}(\mathbf{k}, t) = \hat{h}_0(\mathbf{k}) \cos\!\big(\omega(k) t\big) e^{-\gamma t},
 $$
 
 so each frame is a single inverse FFT — exact in time.

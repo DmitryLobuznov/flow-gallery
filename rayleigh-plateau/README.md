@@ -31,7 +31,7 @@ k R_0 < 1 \quad\Longleftrightarrow\quad \lambda > 2\pi R_0,
 $$
 
 i.e. when the wavelength exceeds the circumference. Among all unstable modes the
-**fastest-growing** one is $\lambda \approx 9.02\,R_0$ ($kR_0\approx 0.697$) —
+**fastest-growing** one is $\lambda \approx 9.02 R_0$ ($kR_0\approx 0.697$) —
 that sets the spacing of the droplets. Small **satellite droplets** often appear
 between the main beads, a hallmark of the nonlinear pinch-off.
 
@@ -40,7 +40,7 @@ Dupont for the radius $h(z,t)$ and axial velocity $v(z,t)$:
 
 $$
 \partial_t(h^2) = -\partial_z(h^2 v), \qquad
-\partial_t v = -v\,\partial_z v - \partial_z \kappa + \frac{3\nu}{h^2}\,\partial_z(h^2\,\partial_z v),
+\partial_t v = -v \partial_z v - \partial_z \kappa + \frac{3\nu}{h^2} \partial_z(h^2 \partial_z v),
 $$
 
 with the full mean curvature of the free surface providing the Laplace pressure
@@ -51,7 +51,7 @@ $$
 
 The $-\partial_z\kappa$ term drives the instability; the viscous term (set by the
 viscosity $\nu$) regularises the pinch and controls satellites. Volume
-$\int h^2\,dz$ is conserved.
+$\int h^2 dz$ is conserved.
 
 ## How it's solved
 
