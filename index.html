@@ -3,68 +3,66 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cahn–Hilliard · Phase Separation on the GPU</title>
-  <meta name="description" content="Interactive WebGL2 simulation of the Cahn–Hilliard equation — spinodal decomposition and capillary phase separation, running in real time on the GPU." />
-  <link rel="stylesheet" href="css/style.css" />
+  <title>flow-gallery · interactive capillary-effect simulations</title>
+  <meta name="description" content="A gallery of real-time, GPU-accelerated simulations of capillary and interfacial flow phenomena — phase separation, capillary waves, dewetting, and more." />
+  <link rel="stylesheet" href="css/landing.css" />
 </head>
 <body>
-  <canvas id="sim"></canvas>
-
-  <aside id="panel">
-    <header>
-      <h1>Cahn–Hilliard</h1>
-      <p class="sub">Phase separation on the GPU</p>
+  <main>
+    <header class="hero">
+      <h1>flow-gallery</h1>
+      <p class="tagline">Interactive, GPU-accelerated simulations of capillary &amp; interfacial flow.</p>
+      <p class="sub">Each effect runs in real time in your browser (WebGL2) and ships with a NumPy spectral reference solver.</p>
     </header>
 
-    <div class="row buttons">
-      <button id="playPause" class="primary">⏸ Pause</button>
-      <button id="reset">↺ Reset</button>
-    </div>
+    <section class="grid">
+      <!-- live -->
+      <a class="card" href="cahn-hilliard/">
+        <div class="thumb"><img src="cahn-hilliard/assets/spinodal.gif" alt="Cahn–Hilliard spinodal decomposition" loading="lazy" /></div>
+        <div class="meta">
+          <h2>Cahn–Hilliard <span class="badge live">live</span></h2>
+          <p>Phase separation &amp; spinodal decomposition. Surface tension coarsens a binary mixture into labyrinths and droplets.</p>
+        </div>
+      </a>
 
-    <label class="ctl">
-      <span>Composition <i id="meanVal">0.00</i></span>
-      <input type="range" id="mean" min="-0.6" max="0.6" step="0.01" value="0" />
-      <small>0 → labyrinth · offset → droplets</small>
-    </label>
+      <!-- roadmap -->
+      <div class="card soon">
+        <div class="thumb placeholder">〜</div>
+        <div class="meta">
+          <h2>Capillary waves <span class="badge">soon</span></h2>
+          <p>Surface ripples governed by surface tension — dispersion, interference, and damping.</p>
+        </div>
+      </div>
 
-    <label class="ctl">
-      <span>Interface width κ <i id="kappaVal">1.0</i></span>
-      <input type="range" id="kappa" min="0.2" max="2.5" step="0.05" value="1.0" />
-    </label>
+      <div class="card soon">
+        <div class="thumb placeholder">▦</div>
+        <div class="meta">
+          <h2>Thin-film dewetting <span class="badge">soon</span></h2>
+          <p>A thin film ruptures and retracts into droplets, driven by intermolecular forces.</p>
+        </div>
+      </div>
 
-    <label class="ctl">
-      <span>Mobility M <i id="mobVal">1.0</i></span>
-      <input type="range" id="mob" min="0.2" max="2.0" step="0.05" value="1.0" />
-    </label>
+      <div class="card soon">
+        <div class="thumb placeholder">◠◠</div>
+        <div class="meta">
+          <h2>Rayleigh–Plateau <span class="badge">soon</span></h2>
+          <p>A liquid jet breaks into beads — the instability that turns streams into drops.</p>
+        </div>
+      </div>
 
-    <label class="ctl">
-      <span>Time step dt <i id="dtVal">0.025</i></span>
-      <input type="range" id="dt" min="0.005" max="0.04" step="0.001" value="0.025" />
-    </label>
+      <div class="card soon">
+        <div class="thumb placeholder">≈</div>
+        <div class="meta">
+          <h2>Marangoni flow <span class="badge">soon</span></h2>
+          <p>Convection driven by surface-tension gradients — tears of wine, thermocapillary cells.</p>
+        </div>
+      </div>
+    </section>
 
-    <label class="ctl">
-      <span>Steps / frame <i id="subVal">25</i></span>
-      <input type="range" id="sub" min="1" max="60" step="1" value="25" />
-    </label>
-
-    <label class="ctl">
-      <span>Colormap</span>
-      <select id="cmap">
-        <option value="0">Viridis</option>
-        <option value="1">Magma</option>
-        <option value="2">Inferno</option>
-        <option value="3">Ink (two-tone)</option>
-        <option value="4">Gold / Teal</option>
-      </select>
-    </label>
-
-    <p class="hint">Drag on the canvas to paint phase. ⟨space⟩ play/pause · ⟨r⟩ reset</p>
-    <footer>
-      <a href="https://github.com/DmitryLobuznov/cahn-hilliard" target="_blank" rel="noopener">source ↗</a>
-      <span id="fps"></span>
+    <footer class="foot">
+      <a href="https://github.com/DmitryLobuznov/flow-gallery" target="_blank" rel="noopener">GitHub ↗</a>
+      <span>MIT · Dmitry Lobuznov</span>
     </footer>
-  </aside>
-
-  <script src="js/main.js"></script>
+  </main>
 </body>
 </html>
