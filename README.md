@@ -12,7 +12,7 @@ physics, once for speed and once for clarity.
 | [**Cahn–Hilliard**](cahn-hilliard/) — phase separation / spinodal decomposition | ✅ live | [open ↗](https://dmitrylobuznov.github.io/flow-gallery/cahn-hilliard/) |
 | [**Capillary waves**](capillary-waves/) — gravity–capillary surface ripples | ✅ live | [open ↗](https://dmitrylobuznov.github.io/flow-gallery/capillary-waves/) |
 | [**Thin-film dewetting**](dewetting/) — rupture &amp; retraction into droplets | ✅ live | [open ↗](https://dmitrylobuznov.github.io/flow-gallery/dewetting/) |
-| Rayleigh–Plateau — jet break-up into droplets | 🛠 planned | — |
+| [**Rayleigh–Plateau**](rayleigh-plateau/) — jet break-up into droplets | ✅ live | [open ↗](https://dmitrylobuznov.github.io/flow-gallery/rayleigh-plateau/) |
 | Marangoni flow — surface-tension-gradient convection | 🛠 planned | — |
 
 <p align="center">
