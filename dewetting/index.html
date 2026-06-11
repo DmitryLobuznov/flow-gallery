@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thin-Film Dewetting · Rupture on the GPU</title>
+  <meta name="description" content="Interactive WebGL2 thin-film dewetting — a liquid film ruptures and retracts into droplets on a precursor layer, in real time on the GPU." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <canvas id="sim"></canvas>
+
+  <aside id="panel">
+    <header>
+      <h1>Dewetting</h1>
+      <p class="sub">Thin films rupture on the GPU</p>
+    </header>
+
+    <div class="row buttons">
+      <button id="playPause" class="primary">⏸ Pause</button>
+      <button id="reset">↺ Reset</button>
+    </div>
+
+    <label class="ctl">
+      <span>Mean thickness h̄ <i id="meanVal">0.80</i></span>
+      <input type="range" id="mean" min="0.6" max="1.1" step="0.01" value="0.80" />
+      <small>near the precursor → sparse droplets · resets the film</small>
+    </label>
+
+    <label class="ctl">
+      <span>Wetting strength κ <i id="kappaVal">0.45</i></span>
+      <input type="range" id="kappa" min="0.15" max="0.6" step="0.01" value="0.45" />
+      <small>higher → finer, faster dewetting</small>
+    </label>
+
+    <label class="ctl">
+      <span>Surface tension γ <i id="gammaVal">2.5</i></span>
+      <input type="range" id="gamma" min="1.5" max="4.0" step="0.1" value="2.5" />
+    </label>
+
+    <label class="ctl">
+      <span>Steps / frame <i id="subVal">200</i></span>
+      <input type="range" id="sub" min="10" max="400" step="10" value="200" />
+    </label>
+
+    <label class="ctl">
+      <span>Look</span>
+      <select id="cmap">
+        <option value="0">Copper</option>
+        <option value="1">Gold</option>
+        <option value="2">Ice</option>
+        <option value="3">Viridis</option>
+      </select>
+    </label>
+
+    <p class="hint">Drag to dig a hole · right-drag to add liquid. ⟨space⟩ play/pause · ⟨r⟩ reset</p>
+    <footer>
+      <a href="../">← gallery</a>
+      <a href="https://github.com/DmitryLobuznov/flow-gallery/tree/main/dewetting" target="_blank" rel="noopener">source ↗</a>
+      <span id="fps"></span>
+    </footer>
+  </aside>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
